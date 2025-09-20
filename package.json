@@ -1,0 +1,26 @@
+{
+  "name": "d3-hierarchical-edge-bundling-monorepo",
+  "version": "1.0.0",
+  "description": "Interactive D3.js Hierarchical Edge Bundling with React 19, Vite, and Tailwind CSS v4",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "preview": "pnpm --filter web preview",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check",
+    "clean": "pnpm -r clean"
+  },
+  "keywords": ["d3.js", "hierarchical-edge-bundling", "react", "vite", "tailwind", "typescript", "pnpm", "monorepo"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
