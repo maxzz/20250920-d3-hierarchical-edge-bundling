@@ -96,7 +96,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     // Add circles for nodes
     nodeGroups
         .append('circle')
-        .attr('r', 6+6)
+        .attr('r', 6 + 6)
         .style('fill', (d: any) => colorScale(d.group.toString()))
         .style('stroke', '#fff')
         .style('stroke-width', 2)
@@ -106,7 +106,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     nodeGroups
         .append('text')
         .attr('dy', '0.31em')
-        .attr('x', (d: any) => d.angle > Math.PI ? -8-10 : 8+10)
+        .attr('x', (d: any) => d.angle > Math.PI ? -8 - 10 : 8 + 10)
         .style('text-anchor', (d: any) => d.angle > Math.PI ? 'end' : 'start')
         .attr('transform', (d: any) => {
             const rotation = d.angle > Math.PI ? d.angle * 180 / Math.PI + 180 : d.angle * 180 / Math.PI;
@@ -132,7 +132,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
                 .select('circle')
                 .style('stroke-width', 4)
                 .style('stroke', '#333')
-                .attr('r', 8+8);
+                .attr('r', 8 + 8);
         })
         .on('mouseout', function () {
             // Reset links
@@ -146,7 +146,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
                 .select('circle')
                 .style('stroke-width', 2)
                 .style('stroke', '#fff')
-                .attr('r', 6+6);
+                .attr('r', 6 + 6);
         });
 
     // Add legend for clusters

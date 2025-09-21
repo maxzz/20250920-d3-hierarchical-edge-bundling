@@ -5,12 +5,15 @@ import { updateD3Diagram } from "./2-update-d3-diagram";
 
 export interface HierarchicalEdgeBundlingProps {
     data: HierarchicalData;
-    width?: number;
-    height?: number;
+    width: number;
+    height: number;
 }
 
-export function HierarchicalEdgeBundling({ data, width = 800, height = 600, className, ...rest }: HierarchicalEdgeBundlingProps & HTMLAttributes<SVGSVGElement>) {
+export function HierarchicalEdgeBundling({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
     const svgRef = useRef<SVGSVGElement>(null);
+
+    const width = 800;
+    const height = 600;
 
     useEffect(
         () => updateD3Diagram({ data, width, height, svgRef }),
@@ -20,8 +23,6 @@ export function HierarchicalEdgeBundling({ data, width = 800, height = 600, clas
     return (
         <svg
             ref={svgRef}
-            // width={width}
-            // height={height}
             viewBox="0 0 800 600"
             className={classNames("size-full border bg-white border-gray-200 rounded-lg shadow-sm", className)}
             {...rest}
