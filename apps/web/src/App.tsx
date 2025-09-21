@@ -8,18 +8,11 @@ export function App() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="text-center">
                         <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                            D3.js Hierarchical Edge Bundling
+                            D3 Hierarchical Edge Bundling
                         </h1>
                         <p className="text-lg text-gray-600 mb-4">
                             Interactive visualization with React 19, Vite, and Tailwind CSS v4
                         </p>
-                        <div className="flex flex-wrap justify-center gap-2 text-sm">
-                            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">React 19</span>
-                            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full">D3.js v7</span>
-                            <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">Vite</span>
-                            <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full">Tailwind v4</span>
-                            <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">TypeScript</span>
-                        </div>
                     </div>
                 </div>
             </header>
@@ -44,28 +37,6 @@ export function App() {
                         />
                     </div>
 
-                    <div className="px-6 pb-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <h3 className="font-semibold text-gray-800 mb-2">Features</h3>
-                                <ul className="text-sm text-gray-600 space-y-1">
-                                    <li>• Interactive node highlighting</li>
-                                    <li>• Bundled edge visualization</li>
-                                    <li>• Hierarchical clustering</li>
-                                    <li>• Color-coded groups</li>
-                                </ul>
-                            </div>
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <h3 className="font-semibold text-gray-800 mb-2">Tech Stack</h3>
-                                <ul className="text-sm text-gray-600 space-y-1">
-                                    <li>• pnpm monorepo structure</li>
-                                    <li>• React 19 with concurrent features</li>
-                                    <li>• D3.js for data visualization</li>
-                                    <li>• Tailwind CSS v4 for styling</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </main>
 
