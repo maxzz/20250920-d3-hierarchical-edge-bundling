@@ -8,11 +8,7 @@ interface HierarchicalEdgeBundlingProps {
     height?: number;
 }
 
-export default function HierarchicalEdgeBundling({
-    data,
-    width = 800,
-    height = 600
-}: HierarchicalEdgeBundlingProps) {
+export default function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: HierarchicalEdgeBundlingProps) {
     const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(
@@ -38,7 +34,7 @@ export default function HierarchicalEdgeBundling({
     );
 }
 
-const updateD3Diagram = ({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }) => {
+function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
     if (!data || !svgRef.current) {
         return;
     }
@@ -146,14 +142,11 @@ const updateD3Diagram = ({ data, width, height, svgRef }: Required<HierarchicalE
         .on('mouseover', function (_event, d: any) {
             // Highlight connected links
             links
-                .style('stroke-opacity', (link: any) =>
-                    (link.source === d || link.target === d) ? 1 : 0.1
+                .style('stroke-opacity', (link: any) => (link.source === d || link.target === d) ? 1 : 0.1
                 )
-                .style('stroke-width', (link: any) =>
-                    (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1
+                .style('stroke-width', (link: any) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1
                 )
-                .style('stroke', (link: any) =>
-                    (link.source === d || link.target === d) ? '#e74c3c' : '#999'
+                .style('stroke', (link: any) => (link.source === d || link.target === d) ? '#e74c3c' : '#999'
                 );
 
             // Highlight node
@@ -209,4 +202,4 @@ const updateD3Diagram = ({ data, width, height, svgRef }: Required<HierarchicalE
         .style('font-weight', 'bold')
         .style('fill', '#333')
         .text('Hierarchical Edge Bundling');
-};
+}
