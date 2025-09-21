@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { HierarchicalData } from '../types';
+import { type HierarchicalData } from '../types';
 import { updateD3Diagram } from './updateD3Diagram';
 
 export interface HierarchicalEdgeBundlingProps {
@@ -33,4 +33,3 @@ export default function HierarchicalEdgeBundling({ data, width = 800, height = 6
         </div>
     );
 }
-
