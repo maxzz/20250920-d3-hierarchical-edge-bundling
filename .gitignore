@@ -140,7 +140,7 @@ $RECYCLE.BIN/
 .nfs*
 
 # IDE and Editor files
-.vscode/
+#.vscode/
 .idea/
 *.swp
 *.swo
