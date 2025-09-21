@@ -16,13 +16,12 @@ export function App() {
             </header>
 
             <main className="m-4 bg-white rounded-xl shadow-lg 1overflow-hidden">
-                <div className="p-6">
-                    <HierarchicalEdgeBundling
-                        data={sampleData}
-                        width={800}
-                        height={600}
-                    />
-                </div>
+
+                <HierarchicalEdgeBundling
+                    data={sampleData}
+                    width={800}
+                    height={600}
+                />
 
                 <p className="px-4 text-gray-600">
                     <strong>Interaction:</strong> Hover over nodes to highlight their connections.

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { type HTMLAttributes, useEffect, useRef  } from "react";
 import { type HierarchicalData } from "../store/9-types";
 import { updateD3Diagram } from "./2-update-d3-diagram";
 
@@ -8,7 +8,7 @@ export interface HierarchicalEdgeBundlingProps {
     height?: number;
 }
 
-export function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: HierarchicalEdgeBundlingProps) {
+export function HierarchicalEdgeBundling({ data, width = 800, height = 600, className, ...rest }: HierarchicalEdgeBundlingProps & HTMLAttributes<HTMLDivElement>) {
     const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(
@@ -17,12 +17,12 @@ export function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: Hi
     );
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="p-6 flex flex-col items-center" {...rest}>
             <svg
                 ref={svgRef}
-                width={width}
-                height={height}
-                className="border border-gray-200 rounded-lg shadow-sm bg-white"
+                // width={width}
+                // height={height}
+                className="size-full border bg-white border-gray-200 rounded-lg shadow-sm"
             />
         </div>
     );
