@@ -24,12 +24,6 @@ export function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: Hi
                 height={height}
                 className="border border-gray-200 rounded-lg shadow-sm bg-white"
             />
-            <div className="mt-4 text-sm text-gray-600 max-w-2xl text-center">
-                <p>
-                    <strong>Interaction:</strong> Hover over nodes to highlight their connections.
-                    The visualization shows relationships between nodes grouped in different clusters with bundled edges.
-                </p>
-            </div>
         </div>
     );
 }
