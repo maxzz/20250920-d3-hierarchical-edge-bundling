@@ -1,7 +1,7 @@
 import HierarchicalEdgeBundling from './components/HierarchicalEdgeBundling';
 import { sampleData } from './data/sampleData';
 
-function App() {
+export function App() {
     return (
         <div className="min-h-screen bg-gray-50">
             <header className="bg-white shadow-sm border-b">
@@ -79,5 +79,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
