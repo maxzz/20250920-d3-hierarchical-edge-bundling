@@ -1,4 +1,5 @@
 import { type HTMLAttributes, useEffect, useRef  } from "react";
+import { classNames } from "../utils";
 import { type HierarchicalData } from "../store/9-types";
 import { updateD3Diagram } from "./2-update-d3-diagram";
 
@@ -17,7 +18,7 @@ export function HierarchicalEdgeBundling({ data, width = 800, height = 600, clas
     );
 
     return (
-        <div className="p-6 flex flex-col items-center" {...rest}>
+        <div className={classNames("flex flex-col items-center", className)} {...rest}>
             <svg
                 ref={svgRef}
                 // width={width}

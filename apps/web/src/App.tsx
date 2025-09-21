@@ -18,6 +18,7 @@ export function App() {
             <main className="m-4 bg-white rounded-xl shadow-lg 1overflow-hidden">
 
                 <HierarchicalEdgeBundling
+                    className="p-6"
                     data={sampleData}
                     width={800}
                     height={600}
