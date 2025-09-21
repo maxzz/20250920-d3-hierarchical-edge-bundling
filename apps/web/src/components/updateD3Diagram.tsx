@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { HierarchicalEdgeBundlingProps } from './HierarchicalEdgeBundling';
+import { type HierarchicalEdgeBundlingProps } from './HierarchicalEdgeBundling';
 
 export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
     if (!data || !svgRef.current) {

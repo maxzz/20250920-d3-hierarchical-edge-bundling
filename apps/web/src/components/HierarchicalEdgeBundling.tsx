@@ -8,7 +8,7 @@ export interface HierarchicalEdgeBundlingProps {
     height?: number;
 }
 
-export default function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: HierarchicalEdgeBundlingProps) {
+export function HierarchicalEdgeBundling({ data, width = 800, height = 600 }: HierarchicalEdgeBundlingProps) {
     const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(
