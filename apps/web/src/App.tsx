@@ -1,5 +1,5 @@
-import { HierarchicalEdgeBundling } from './components/HierarchicalEdgeBundling';
-import { sampleData } from './data/sampleData';
+import { HierarchicalEdgeBundling } from "./components/1-hierarchical-edge-bundling";
+import { sampleData } from "./store/data/1-sample-data";
 
 export function App() {
     return (

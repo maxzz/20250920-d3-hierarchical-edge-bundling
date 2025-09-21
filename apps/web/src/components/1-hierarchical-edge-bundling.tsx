@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { type HierarchicalData } from '../store';
-import { updateD3Diagram } from './updateD3Diagram';
+import { useEffect, useRef } from "react";
+import { type HierarchicalData } from "../store/9-types";
+import { updateD3Diagram } from "./2-update-d3-diagram";
 
 export interface HierarchicalEdgeBundlingProps {
     data: HierarchicalData;
