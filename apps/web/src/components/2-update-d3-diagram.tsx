@@ -16,46 +16,57 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
 
     // Flatten all nodes for circular layout
     const allNodes: any[] = [];
-    data.nodes.forEach(cluster => {
-        if (cluster.children) {
-            cluster.children.forEach(child => {
-                allNodes.push({
-                    ...child,
-                    cluster: cluster.name
+    data.nodes.forEach(
+        (cluster) => {
+            if (cluster.children) {
+                cluster.children.forEach(child => {
+                    allNodes.push({
+                        ...child,
+                        cluster: cluster.name
+                    });
                 });
-            });
+            }
         }
-    });
+    );
 
     // Create circular positions for nodes
     const angleStep = (2 * Math.PI) / allNodes.length;
-    allNodes.forEach((node, i) => {
-        const angle = i * angleStep;
-        node.x = centerX + Math.cos(angle) * radius;
-        node.y = centerY + Math.sin(angle) * radius;
-        node.angle = angle;
-    });
+    allNodes.forEach(
+        (node, i) => {
+            const angle = i * angleStep;
+            node.x = centerX + Math.cos(angle) * radius;
+            node.y = centerY + Math.sin(angle) * radius;
+            node.angle = angle;
+        }
+    );
 
     // Create a map for quick node lookup
     const nodeMap = new Map();
-    allNodes.forEach(node => {
-        nodeMap.set(node.name, node);
-    });
+    allNodes.forEach(
+        (node) => {
+            nodeMap.set(node.name, node);
+        }
+    );
 
     // Color scale for groups
     const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Create link data
     const linkData = data.links
-        .map(link => ({
-            source: nodeMap.get(link.source),
-            target: nodeMap.get(link.target),
-            value: link.value
-        }))
-        .filter(link => link.source && link.target);
+        .map(
+            (link) => ({
+                source: nodeMap.get(link.source),
+                target: nodeMap.get(link.target),
+                value: link.value
+            })
+        )
+        .filter(
+            link => link.source && link.target
+        );
 
     // Draw bundled edges
-    const links = svg.selectAll('.link')
+    const links = svg
+        .selectAll('.link')
         .data(linkData)
         .enter().append('path')
         .attr('class', 'link')
@@ -76,14 +87,16 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .style('stroke-linecap', 'round');
 
     // Draw nodes
-    const nodeGroups = svg.selectAll('.node')
+    const nodeGroups = svg
+        .selectAll('.node')
         .data(allNodes)
         .enter().append('g')
         .attr('class', 'node')
         .attr('transform', (d: any) => `translate(${d.x},${d.y})`);
 
     // Add circles for nodes
-    nodeGroups.append('circle')
+    nodeGroups
+        .append('circle')
         .attr('r', 6)
         .style('fill', (d: any) => colorScale(d.group.toString()))
         .style('stroke', '#fff')
@@ -91,7 +104,8 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .style('cursor', 'pointer');
 
     // Add labels
-    nodeGroups.append('text')
+    nodeGroups
+        .append('text')
         .attr('dy', '0.31em')
         .attr('x', (d: any) => d.angle > Math.PI ? -8 : 8)
         .style('text-anchor', (d: any) => d.angle > Math.PI ? 'end' : 'start')
@@ -109,15 +123,14 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .on('mouseover', function (_event, d: any) {
             // Highlight connected links
             links
-                .style('stroke-opacity', (link: any) => (link.source === d || link.target === d) ? 1 : 0.1
-                )
-                .style('stroke-width', (link: any) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1
-                )
-                .style('stroke', (link: any) => (link.source === d || link.target === d) ? '#e74c3c' : '#999'
-                );
+                .style('stroke-opacity', (link: any) => (link.source === d || link.target === d) ? 1 : 0.1)
+                .style('stroke-width', (link: any) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1)
+                .style('stroke', (link: any) => (link.source === d || link.target === d) ? '#e74c3c' : '#999');
 
             // Highlight node
-            d3.select(this).select('circle')
+            d3
+                .select(this)
+                .select('circle')
                 .style('stroke-width', 4)
                 .style('stroke', '#333')
                 .attr('r', 8);
@@ -128,9 +141,10 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
                 .style('stroke-opacity', 0.6)
                 .style('stroke-width', (link: any) => Math.sqrt(link.value) + 1)
                 .style('stroke', '#999');
-
             // Reset node
-            d3.select(this).select('circle')
+            d3
+                .select(this)
+                .select('circle')
                 .style('stroke-width', 2)
                 .style('stroke', '#fff')
                 .attr('r', 6);
@@ -138,11 +152,13 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
 
     // Add legend for clusters
     const clusters = [...new Set(allNodes.map((node: any) => node.cluster))];
-    const legend = svg.append('g')
+    const legend = svg
+        .append('g')
         .attr('class', 'legend')
         .attr('transform', `translate(20, 30)`);
 
-    legend.selectAll('.legend-item')
+    legend
+        .selectAll('.legend-item')
         .data(clusters)
         .enter().append('g')
         .attr('class', 'legend-item')
@@ -161,7 +177,8 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         });
 
     // Add title
-    svg.append('text')
+    svg
+        .append('text')
         .attr('x', width / 2)
         .attr('y', 25)
         .attr('text-anchor', 'middle')
