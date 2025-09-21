@@ -18,14 +18,11 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const allNodes: any[] = [];
     data.nodes.forEach(
         (cluster) => {
-            if (cluster.children) {
-                cluster.children.forEach(child => {
-                    allNodes.push({
-                        ...child,
-                        cluster: cluster.name
-                    });
-                });
-            }
+            cluster.children?.forEach(
+                (child) => {
+                    allNodes.push({ ...child, cluster: cluster.name });
+                }
+            );
         }
     );
 
@@ -68,7 +65,8 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const links = svg
         .selectAll('.link')
         .data(linkData)
-        .enter().append('path')
+        .enter()
+        .append('path')
         .attr('class', 'link')
         .attr('d', (d: any) => {
             // Create curved path that goes through center
@@ -90,7 +88,8 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const nodeGroups = svg
         .selectAll('.node')
         .data(allNodes)
-        .enter().append('g')
+        .enter()
+        .append('g')
         .attr('class', 'node')
         .attr('transform', (d: any) => `translate(${d.x},${d.y})`);
 
