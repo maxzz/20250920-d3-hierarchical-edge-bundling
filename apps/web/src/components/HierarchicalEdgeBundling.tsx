@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { type HierarchicalData } from '../types';
+import { type HierarchicalData } from '../store';
 import { updateD3Diagram } from './updateD3Diagram';
 
 export interface HierarchicalEdgeBundlingProps {

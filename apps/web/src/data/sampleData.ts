@@ -1,4 +1,4 @@
-import { type HierarchicalData } from '../types';
+import { type HierarchicalData } from '../store';
 
 export const sampleData: HierarchicalData = {
     nodes: [
