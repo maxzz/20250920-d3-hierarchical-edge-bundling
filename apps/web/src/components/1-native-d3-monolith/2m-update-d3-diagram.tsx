@@ -1,27 +1,11 @@
 import * as d3 from "d3";
-import { type HierarchicalData, type NodeData } from "@/store/9-types";
+import { type HierarchicalData } from "@/store/9-types";
+import { type OurLink, type OurNode } from "./9-types-internal";
 
-export interface HierarchicalEdgeBundlingProps {
+interface HierarchicalEdgeBundlingProps {
     data: HierarchicalData;
     width: number;
     height: number;
-}
-
-interface OurNode extends NodeData {
-    // group: number;
-    // name: string;
-    children?: OurNode[];
-
-    cluster: string;
-    angle: number;
-    x: number;
-    y: number;
-};
-
-interface OurLink {
-    source: OurNode | undefined;
-    target: OurNode | undefined;
-    value: number;
 }
 
 export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {

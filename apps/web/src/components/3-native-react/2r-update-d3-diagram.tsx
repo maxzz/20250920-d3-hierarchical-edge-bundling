@@ -1,5 +1,6 @@
 import * as d3 from "d3";
-import { type HierarchicalData, type NodeData } from "@/store/9-types";
+import { type HierarchicalData } from "@/store/9-types";
+import { type OurLink, type OurNode } from "./9-types-internal";
 
 interface HierarchicalEdgeBundlingProps {
     data: HierarchicalData;
@@ -39,24 +40,6 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
 
     // Add title
     // buildSvgTitle(svg, width);
-}
-
-interface OurNode extends NodeData {
-    // group: number;
-    // name: string; // Name should be unique and used as key
-    children?: OurNode[];
-
-    cluster: string;
-    angle: number;
-    x: number;
-    y: number;
-};
-
-interface OurLink {
-    source: OurNode | undefined;
-    target: OurNode | undefined;
-    value: number;   // Weight of link
-    keyName: string; // Unique key for links as combination of source and target
 }
 
 function createAllNodesAndLinks(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
