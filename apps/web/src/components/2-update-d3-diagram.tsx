@@ -1,5 +1,23 @@
 import * as d3 from "d3";
 import { type HierarchicalEdgeBundlingProps } from "./1-hierarchical-edge-bundling";
+import { type NodeData } from "@/store/9-types";
+
+interface Node extends NodeData {
+    group: number;
+    name: string;
+    children?: Node[];
+
+    cluster: string;
+    angle: number;
+    x: number;
+    y: number;
+};
+
+interface LinkData {
+    source: Node | undefined;
+    target: Node | undefined;
+    value: number;
+}
 
 export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
     if (!data || !svgRef.current) {
@@ -15,12 +33,12 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const centerY = height / 2;
 
     // Flatten all nodes for circular layout
-    const allNodes: any[] = [];
+    const allNodes: Node[] = [];
     data.nodes.forEach(
         (cluster) => {
             cluster.children?.forEach(
                 (child) => {
-                    allNodes.push({ ...child, cluster: cluster.name });
+                    allNodes.push({ ...child, cluster: cluster.name } as Node); // the rest will be added by the next loop
                 }
             );
         }
@@ -38,7 +56,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     );
 
     // Create a map for quick node lookup
-    const nodeMap = new Map();
+    const nodeMap = new Map<string, Node>();
     allNodes.forEach(
         (node) => {
             nodeMap.set(node.name, node);
@@ -49,7 +67,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Create link data
-    const linkData = data.links
+    const linkData: LinkData[] = data.links
         .map(
             (link) => ({
                 source: nodeMap.get(link.source),
@@ -68,7 +86,10 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .enter()
         .append('path')
         .attr('class', 'link')
-        .attr('d', (d: any) => {
+        .attr('d', (d: LinkData) => {
+            if (!d.source || !d.target) {
+                return '';
+            }
             // Create curved path that goes through center
             const midX = (d.source.x + d.target.x) / 2;
             const midY = (d.source.y + d.target.y) / 2;
@@ -91,13 +112,13 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .enter()
         .append('g')
         .attr('class', 'node')
-        .attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+        .attr('transform', (d: Node) => `translate(${d.x},${d.y})`);
 
     // Add circles for nodes
     nodeGroups
         .append('circle')
         .attr('r', 6 + 6)
-        .style('fill', (d: any) => colorScale(d.group.toString()))
+        .style('fill', (d: Node) => colorScale(d.group.toString()))
         .style('stroke', '#fff')
         .style('stroke-width', 2)
         .style('cursor', 'pointer');
@@ -106,25 +127,25 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     nodeGroups
         .append('text')
         .attr('dy', '0.31em')
-        .attr('x', (d: any) => d.angle > Math.PI ? -8 - 10 : 8 + 10)
-        .style('text-anchor', (d: any) => d.angle > Math.PI ? 'end' : 'start')
-        .attr('transform', (d: any) => {
+        .attr('x', (d: Node) => d.angle > Math.PI ? -8 - 10 : 8 + 10)
+        .style('text-anchor', (d: Node) => d.angle > Math.PI ? 'end' : 'start')
+        .attr('transform', (d: Node) => {
             const rotation = d.angle > Math.PI ? d.angle * 180 / Math.PI + 180 : d.angle * 180 / Math.PI;
             return `rotate(${rotation})`;
         })
-        .text((d: any) => d.name)
+        .text((d: Node) => d.name)
         .style('font-size', '10px')
         .style('font-family', 'Arial, sans-serif')
         .style('fill', '#333');
 
     // Add interactivity
     nodeGroups
-        .on('mouseover', function (_event, d: any) {
+        .on('mouseover', function (_event, d: Node) {
             // Highlight connected links
             links
-                .style('stroke-opacity', (link: any) => (link.source === d || link.target === d) ? 1 : 0.1)
-                .style('stroke-width', (link: any) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1)
-                .style('stroke', (link: any) => (link.source === d || link.target === d) ? colorScale(d.group.toString()) : '#999');
+                .style('stroke-opacity', (link: LinkData) => (link.source === d || link.target === d) ? 1 : 0.1)
+                .style('stroke-width', (link: LinkData) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1)
+                .style('stroke', (link: LinkData) => (link.source === d || link.target === d) ? colorScale(d.group.toString()) : '#999');
 
             // Highlight node
             d3
@@ -138,7 +159,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
             // Reset links
             links
                 .style('stroke-opacity', 0.6)
-                .style('stroke-width', (link: any) => Math.sqrt(link.value) + 1)
+                .style('stroke-width', (link: LinkData) => Math.sqrt(link.value) + 1)
                 .style('stroke', '#999');
             // Reset node
             d3
@@ -150,7 +171,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         });
 
     // Add legend for clusters
-    const clusters = [...new Set(allNodes.map((node: any) => node.cluster))];
+    const clusters = [...new Set(allNodes.map((node: Node) => node.cluster))];
     const legend = svg
         .append('g')
         .attr('class', 'legend')
