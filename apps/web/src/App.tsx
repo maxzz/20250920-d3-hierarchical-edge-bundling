@@ -3,21 +3,21 @@ import { sampleData } from "./store/data/1-sample-data";
 
 export function App() {
     return (
-        <div className="min-h-screen max-w-3xl mx-auto text-xs grid grid-rows-[auto_1fr_auto]">
+        <div className="min-h-screen mx-auto text-xs grid grid-rows-[auto_1fr_auto] gap-4">
 
             <header className="px-4 py-2 bg-gray-50 border-b border-gray-200 shadow-sm flex flex-col items-center justify-center">
                 <h1 className="pb-1.5 text-xl font-bold tracking-tight text-gray-600 scale-y-150">
                     Interactive Hierarchical Edge Bundling
                 </h1>
-                <p className="text-xs text-center text-balance text-gray-600">
+                <p className="max-w-3xl text-xs text-center text-balance text-gray-600">
                     This visualization demonstrates hierarchical edge bundling, where connections between nodes
                     in different clusters are bundled together to reduce visual clutter and reveal structural patterns.
                 </p>
             </header>
 
-            <main className="m-4 bg-white flex flex-col items-center justify-center">
+            <main className="max-w-3xl mx-auto bg-white flex flex-col items-center justify-center">
                 <HierarchicalEdgeBundling
-                    className="p-6"
+                    className=""
                     data={sampleData}
                 />
 

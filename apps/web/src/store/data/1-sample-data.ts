@@ -47,7 +47,7 @@ export const sampleData: HierarchicalData = {
         // Inter-cluster connections
         { source: "node_1_1", target: "node_1_2", value: 3 },
         { source: "node_1_1", target: "node_1_3", value: 3 },
-
+        //
         { source: "node_1_1", target: "node_2_1", value: 3 },
         { source: "node_1_2", target: "node_3_2", value: 2 },
         { source: "node_1_3", target: "node_4_1", value: 4 },
@@ -62,7 +62,8 @@ export const sampleData: HierarchicalData = {
         { source: "node_3_4", target: "node_1_1", value: 2 },
 
         { source: "node_4_1", target: "node_5_4", value: 3 },
-        { source: "node_4_2", target: "node_1_2", value: 2 },
+        { source: "node_4_2", target: "node_1_2", value: 20 },
+        { source: "node_4_2", target: "node_5_1", value: 30 },
 
         { source: "node_5_1", target: "node_1_3", value: 1 },
         { source: "node_5_3", target: "node_2_2", value: 2 },
