@@ -9,7 +9,7 @@ export interface HierarchicalEdgeBundlingProps {
     height: number;
 }
 
-export function HierarchicalEdgeBundling({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
+export function HierarchicalEdgeBundlingMonolith({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
     const svgRef = useRef<SVGSVGElement>(null);
 
     const width = 800;

@@ -1,6 +1,7 @@
 import { sampleData } from "./store/data/1-sample-data";
-import { HierarchicalEdgeBundling } from "./components/1-native-d3";
-import { HierarchicalEdgeBundlingReact } from "./components/i2-native-react";
+import { HierarchicalEdgeBundlingMonolith } from "./components/1-native-d3-monolith";
+import { HierarchicalEdgeBundlingByParts } from "./components/2-native-d3-by-parts";
+import { HierarchicalEdgeBundlingReact } from "./components/3-native-react";
 
 export function App() {
     return (
@@ -17,11 +18,16 @@ export function App() {
             </header>
 
             <main className="max-w-3xl mx-auto bg-white flex flex-col items-center justify-center">
-                <HierarchicalEdgeBundlingReact
+                
+                {/* <HierarchicalEdgeBundlingMonolith
+                    className=""
+                    data={sampleData}
+                /> */}
+                <HierarchicalEdgeBundlingByParts
                     className=""
                     data={sampleData}
                 />
-                {/* <HierarchicalEdgeBundling
+                {/* <HierarchicalEdgeBundlingReact
                     className=""
                     data={sampleData}
                 /> */}
