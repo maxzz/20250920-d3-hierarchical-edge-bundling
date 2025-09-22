@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { type HierarchicalEdgeBundlingProps } from "./1d-hierarchical-edge-bundling";
-import { type NodeData } from "@/store/9-types";
+import { type HierarchicalData, type NodeData } from "@/store/9-types";
 
 interface OurNode extends NodeData {
     // group: number;
@@ -19,19 +19,7 @@ interface OurLink {
     value: number;
 }
 
-export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
-    if (!data || !svgRef.current) {
-        return;
-    }
-
-    // Clear previous visualization
-    d3.select(svgRef.current).selectAll("*").remove();
-
-    const svg = d3.select(svgRef.current);
-    const radius = Math.min(width, height) / 2 - 80;
-    const centerX = width / 2;
-    const centerY = height / 2;
-
+function createNodesAndLookup(data: HierarchicalData, centerX: number, centerY: number, radius: number): { allNodes: OurNode[]; linkData: OurLink[]; } {
     // Flatten all nodes for circular layout
     const allNodes: OurNode[] = [];
     data.nodes.forEach(
@@ -63,9 +51,6 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         }
     );
 
-    // Color scale for groups
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
     // Create link data
     const linkData: OurLink[] = data.links
         .map(
@@ -78,6 +63,27 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .filter(
             link => link.source && link.target
         );
+
+    return { allNodes, linkData };
+}
+
+export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
+    if (!data || !svgRef.current) {
+        return;
+    }
+
+    // Clear previous visualization
+    d3.select(svgRef.current).selectAll("*").remove();
+
+    const svg = d3.select(svgRef.current);
+    const radius = Math.min(width, height) / 2 - 80;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const { allNodes, linkData } = createNodesAndLookup(data, centerX, centerY, radius);
+
+    // Color scale for groups
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Draw bundled edges
     const links = svg
