@@ -20,7 +20,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const centerX = width / 2;
     const centerY = height / 2;
 
-    const { allNodes, linkData } = createNodesAndLookup(data);
+    const { allNodes, linkData } = createAllNodesAndLinks(data);
 
     // Create circular positions for nodes
     positionNodes(allNodes, centerX, centerY, radius);
@@ -43,7 +43,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
 
 interface OurNode extends NodeData {
     // group: number;
-    // name: string;
+    // name: string; // Name should be unique and used as key
     children?: OurNode[];
 
     cluster: string;
@@ -55,10 +55,11 @@ interface OurNode extends NodeData {
 interface OurLink {
     source: OurNode | undefined;
     target: OurNode | undefined;
-    value: number;
+    value: number;   // Weight of link
+    keyName: string; // Unique key for links as combination of source and target
 }
 
-function createNodesAndLookup(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
+function createAllNodesAndLinks(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
     // Flatten all nodes for circular layout
     const allNodes: OurNode[] = [];
     data.nodes.forEach(
@@ -85,7 +86,8 @@ function createNodesAndLookup(data: HierarchicalData): { allNodes: OurNode[]; li
             (link) => ({
                 source: nodeMap.get(link.source),
                 target: nodeMap.get(link.target),
-                value: link.value
+                value: link.value,
+                keyName: `${link.source}-${link.target}`
             })
         )
         .filter(

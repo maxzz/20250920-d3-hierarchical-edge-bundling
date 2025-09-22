@@ -20,7 +20,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const centerX = width / 2;
     const centerY = height / 2;
 
-    const { allNodes, linkData } = createNodesAndLookup(data);
+    const { allNodes, linkData } = createAllNodesAndLinks(data);
 
     // Create circular positions for nodes
     positionNodes(allNodes, centerX, centerY, radius);
@@ -58,7 +58,7 @@ interface OurLink {
     value: number;
 }
 
-function createNodesAndLookup(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
+function createAllNodesAndLinks(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
     // Flatten all nodes for circular layout
     const allNodes: OurNode[] = [];
     data.nodes.forEach(
