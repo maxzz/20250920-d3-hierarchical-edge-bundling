@@ -27,8 +27,6 @@
     "scripts": {
         "dev": "pnpm --color --filter web dev",
         "build": "pnpm --filter web build",
-        "preview": "pnpm --filter web preview",
-        "lint": "pnpm -r lint",
-        "type-check": "pnpm -r type-check"
+        "preview": "pnpm --filter web preview"
     }
 }
