@@ -1,6 +1,11 @@
 import * as d3 from "d3";
-import { type HierarchicalEdgeBundlingProps } from "./1m-hierarchical-edge-bundling";
-import { type NodeData } from "@/store/9-types";
+import { type HierarchicalData, type NodeData } from "@/store/9-types";
+
+export interface HierarchicalEdgeBundlingProps {
+    data: HierarchicalData;
+    width: number;
+    height: number;
+}
 
 interface OurNode extends NodeData {
     // group: number;

@@ -1,6 +1,45 @@
 import * as d3 from "d3";
-import { type HierarchicalEdgeBundlingProps } from "./1d-hierarchical-edge-bundling";
 import { type HierarchicalData, type NodeData } from "@/store/9-types";
+
+interface HierarchicalEdgeBundlingProps {
+    data: HierarchicalData;
+    width: number;
+    height: number;
+}
+
+export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
+    if (!data || !svgRef.current) {
+        return;
+    }
+
+    // Clear previous visualization
+    d3.select(svgRef.current).selectAll("*").remove();
+
+    const svg = d3.select(svgRef.current);
+    const radius = Math.min(width, height) / 2 - 80;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const { allNodes, linkData } = createNodesAndLookup(data);
+
+    // Create circular positions for nodes
+    positionNodes(allNodes, centerX, centerY, radius);
+
+    // Color scale for groups
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+    //
+    const links = buildSvgLinks(svg, linkData, centerX, centerY);
+
+    //
+    buildSvgNodes(svg, allNodes, links, colorScale);
+
+    //
+    buildSvgLegend(svg, allNodes, data, colorScale, height);
+
+    // Add title
+    // buildSvgTitle(svg, width);
+}
 
 interface OurNode extends NodeData {
     // group: number;
@@ -19,7 +58,7 @@ interface OurLink {
     value: number;
 }
 
-function createNodesAndLookup(data: HierarchicalData, centerX: number, centerY: number, radius: number): { allNodes: OurNode[]; linkData: OurLink[]; } {
+function createNodesAndLookup(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {
     // Flatten all nodes for circular layout
     const allNodes: OurNode[] = [];
     data.nodes.forEach(
@@ -29,17 +68,6 @@ function createNodesAndLookup(data: HierarchicalData, centerX: number, centerY: 
                     allNodes.push({ ...child, cluster: cluster.name } as OurNode); // the rest will be added by the next loop
                 }
             );
-        }
-    );
-
-    // Create circular positions for nodes
-    const angleStep = (2 * Math.PI) / allNodes.length;
-    allNodes.forEach(
-        (node, i) => {
-            const angle = i * angleStep;
-            node.x = centerX + Math.cos(angle) * radius;
-            node.y = centerY + Math.sin(angle) * radius;
-            node.angle = angle;
         }
     );
 
@@ -67,24 +95,20 @@ function createNodesAndLookup(data: HierarchicalData, centerX: number, centerY: 
     return { allNodes, linkData };
 }
 
-export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
-    if (!data || !svgRef.current) {
-        return;
-    }
+function positionNodes(allNodes: OurNode[], centerX: number, centerY: number, radius: number): void {
+    // Create circular positions for nodes
+    const angleStep = (2 * Math.PI) / allNodes.length;
+    allNodes.forEach(
+        (node, i) => {
+            const angle = i * angleStep;
+            node.x = centerX + Math.cos(angle) * radius;
+            node.y = centerY + Math.sin(angle) * radius;
+            node.angle = angle;
+        }
+    );
+}
 
-    // Clear previous visualization
-    d3.select(svgRef.current).selectAll("*").remove();
-
-    const svg = d3.select(svgRef.current);
-    const radius = Math.min(width, height) / 2 - 80;
-    const centerX = width / 2;
-    const centerY = height / 2;
-
-    const { allNodes, linkData } = createNodesAndLookup(data, centerX, centerY, radius);
-
-    // Color scale for groups
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
+function buildSvgLinks(svg: d3.Selection<SVGSVGElement, any, any, any>, linkData: OurLink[], centerX: number, centerY: number): d3.Selection<SVGPathElement, OurLink, SVGSVGElement, any> {
     // Draw bundled edges
     const links = svg
         .selectAll('.link')
@@ -109,7 +133,10 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         .style('stroke-width', (d: any) => Math.sqrt(d.value) + 1)
         .style('stroke-opacity', 0.6)
         .style('stroke-linecap', 'round');
+    return links;
+}
 
+function buildSvgNodes(svg: d3.Selection<SVGSVGElement, any, any, any>, allNodes: OurNode[], links: d3.Selection<SVGPathElement, OurLink, SVGSVGElement, any>, colorScale: d3.ScaleOrdinal<string, string, never>) {
     // Draw nodes
     const nodeGroups = svg
         .selectAll('.node')
@@ -182,7 +209,9 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
                 .style('stroke', '#fff')
                 .attr('r', 6 + 6);
         });
+}
 
+function buildSvgLegend(svg: d3.Selection<SVGSVGElement, any, any, any>, allNodes: OurNode[], data: HierarchicalData, colorScale: d3.ScaleOrdinal<string, string, never>, height: number): void {
     // Add legend for clusters
     const clusters = [...new Set(allNodes.map((node: OurNode) => node.cluster))];
     const legend = svg
@@ -211,15 +240,17 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
                 .style('font-size', '12px')
                 .style('fill', '#333');
         });
+}
 
+function buildSvgTitle(svg: d3.Selection<SVGSVGElement, any, any, any>, width: number): void {
     // Add title
-    // svg
-    //     .append('text')
-    //     .attr('x', width / 2)
-    //     .attr('y', 25)
-    //     .attr('text-anchor', 'middle')
-    //     .style('font-size', '16px')
-    //     .style('font-weight', 'bold')
-    //     .style('fill', '#333')
-    //     .text('Hierarchical Edge Bundling');
+    svg
+        .append('text')
+        .attr('x', width / 2)
+        .attr('y', 25)
+        .attr('text-anchor', 'middle')
+        .style('font-size', '16px')
+        .style('font-weight', 'bold')
+        .style('fill', '#333')
+        .text('Hierarchical Edge Bundling');
 }

@@ -3,12 +3,6 @@ import { classNames } from "../../utils";
 import { type HierarchicalData } from "../../store/9-types";
 import { updateD3Diagram } from "./2m-update-d3-diagram";
 
-export interface HierarchicalEdgeBundlingProps {
-    data: HierarchicalData;
-    width: number;
-    height: number;
-}
-
 export function HierarchicalEdgeBundlingMonolith({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
     const svgRef = useRef<SVGSVGElement>(null);
 
