@@ -3,10 +3,10 @@ import { sampleData } from "./store/data/1-sample-data";
 
 export function App() {
     return (
-        <div className="min-h-screen max-w-3xl mx-auto text-sm grid grid-rows-[auto_1fr_auto]">
+        <div className="min-h-screen max-w-3xl mx-auto text-xs grid grid-rows-[auto_1fr_auto]">
 
             <header className="px-4 py-2 bg-gray-50 border-b border-gray-200 shadow-sm flex flex-col items-center justify-center">
-                <h1 className="pb-1 text-xl font-bold tracking-tight text-gray-600 scale-y-150">
+                <h1 className="pb-1.5 text-xl font-bold tracking-tight text-gray-600 scale-y-150">
                     Interactive Hierarchical Edge Bundling
                 </h1>
                 <p className="text-xs text-center text-balance text-gray-600">
@@ -21,14 +21,14 @@ export function App() {
                     data={sampleData}
                 />
 
-                <p className="p-4 text-gray-600">
+                <p className="py-1 text-gray-600">
                     Interaction: Hover over nodes to highlight their connections.
                     The visualization shows relationships between nodes grouped in different clusters with bundled edges.
                 </p>
             </main>
 
             <footer className="py-4 text-gray-500 bg-gray-50 border-t border-gray-200">
-                <p className="text-center text-sm">
+                <p className="text-center">
                     September 2025
                 </p>
             </footer>

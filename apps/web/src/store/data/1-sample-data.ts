@@ -45,6 +45,9 @@ export const sampleData: HierarchicalData = {
     ],
     links: [
         // Inter-cluster connections
+        { source: "node_1_1", target: "node_1_2", value: 3 },
+        { source: "node_1_1", target: "node_1_3", value: 3 },
+
         { source: "node_1_1", target: "node_2_1", value: 3 },
         { source: "node_1_2", target: "node_3_2", value: 2 },
         { source: "node_1_3", target: "node_4_1", value: 4 },
