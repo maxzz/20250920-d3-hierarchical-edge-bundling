@@ -182,7 +182,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const legend = svg
         .append('g')
         .attr('class', 'legend')
-        .attr('transform', `translate(20, ${height})`);
+        .attr('transform', `translate(20, ${height - 20})`);
 
     legend
         .selectAll('.legend-item')
