@@ -18,19 +18,10 @@ export function App() {
             </header>
 
             <main className="max-w-3xl mx-auto bg-white flex flex-col items-center justify-center">
-                
-                {/* <HierarchicalEdgeBundlingMonolith
-                    className=""
-                    data={sampleData}
-                /> */}
-                <HierarchicalEdgeBundlingByParts
-                    className=""
-                    data={sampleData}
-                />
-                {/* <HierarchicalEdgeBundlingReact
-                    className=""
-                    data={sampleData}
-                /> */}
+
+                {/* <HierarchicalEdgeBundlingMonolith className="" data={sampleData} /> */}
+                <HierarchicalEdgeBundlingByParts className="" data={sampleData} />
+                {/* <HierarchicalEdgeBundlingReact className="" data={sampleData} /> */}
 
                 <p className="py-1 text-gray-600">
                     Interaction: Hover over nodes to highlight their connections.

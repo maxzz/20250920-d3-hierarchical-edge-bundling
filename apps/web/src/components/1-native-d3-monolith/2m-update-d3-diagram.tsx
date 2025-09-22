@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { type HierarchicalEdgeBundlingProps } from "./1-hierarchical-edge-bundling";
+import { type HierarchicalEdgeBundlingProps } from "./1m-hierarchical-edge-bundling";
 import { type NodeData } from "@/store/9-types";
 
 interface OurNode extends NodeData {

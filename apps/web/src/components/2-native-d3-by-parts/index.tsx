@@ -1,1 +1,1 @@
-export * from "./1-hierarchical-edge-bundling";
+export * from "./1d-hierarchical-edge-bundling";
