@@ -154,20 +154,23 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const legend = svg
         .append('g')
         .attr('class', 'legend')
-        .attr('transform', `translate(20, 30)`);
+        .attr('transform', `translate(20, ${height - (clusters.length - 1) * 20})`);
 
     legend
         .selectAll('.legend-item')
         .data(clusters)
-        .enter().append('g')
+        .enter()
+        .append('g')
         .attr('class', 'legend-item')
         .attr('transform', (_d: any, i: number) => `translate(0, ${i * 20})`)
         .each(function (d: any) {
             const group = d3.select(this);
-            group.append('circle')
+            group
+                .append('circle')
                 .attr('r', 4)
                 .style('fill', colorScale(data.nodes.find(n => n.name === d)?.group.toString() || '1'));
-            group.append('text')
+            group
+                .append('text')
                 .attr('x', 10)
                 .attr('dy', '0.31em')
                 .text(d)
@@ -176,13 +179,13 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
         });
 
     // Add title
-    svg
-        .append('text')
-        .attr('x', width / 2)
-        .attr('y', 25)
-        .attr('text-anchor', 'middle')
-        .style('font-size', '16px')
-        .style('font-weight', 'bold')
-        .style('fill', '#333')
-        .text('Hierarchical Edge Bundling');
+    // svg
+    //     .append('text')
+    //     .attr('x', width / 2)
+    //     .attr('y', 25)
+    //     .attr('text-anchor', 'middle')
+    //     .style('font-size', '16px')
+    //     .style('font-weight', 'bold')
+    //     .style('fill', '#333')
+    //     .text('Hierarchical Edge Bundling');
 }
