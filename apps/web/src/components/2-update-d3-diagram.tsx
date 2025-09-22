@@ -124,7 +124,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
             links
                 .style('stroke-opacity', (link: any) => (link.source === d || link.target === d) ? 1 : 0.1)
                 .style('stroke-width', (link: any) => (link.source === d || link.target === d) ? Math.sqrt(link.value) * 2 + 1 : Math.sqrt(link.value) + 1)
-                .style('stroke', (link: any) => (link.source === d || link.target === d) ? '#e74c3c' : '#999');
+                .style('stroke', (link: any) => (link.source === d || link.target === d) ? colorScale(d.group.toString()) : '#999');
 
             // Highlight node
             d3
@@ -154,7 +154,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     const legend = svg
         .append('g')
         .attr('class', 'legend')
-        .attr('transform', `translate(20, ${height - (clusters.length - 1) * 20})`);
+        .attr('transform', `translate(20, ${height})`);
 
     legend
         .selectAll('.legend-item')
@@ -167,7 +167,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
             const group = d3.select(this);
             group
                 .append('circle')
-                .attr('r', 4)
+                .attr('r', 5)
                 .style('fill', colorScale(data.nodes.find(n => n.name === d)?.group.toString() || '1'));
             group
                 .append('text')
