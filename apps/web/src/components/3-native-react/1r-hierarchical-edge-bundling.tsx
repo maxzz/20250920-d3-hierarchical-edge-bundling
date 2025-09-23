@@ -1,7 +1,8 @@
 import { type HTMLAttributes, useEffect, useRef } from "react";
 import { classNames } from "../../utils";
 import { type HierarchicalData } from "../../store/9-types";
-import { positionNodes, updateD3Diagram } from "./2r-update-d3-diagram";
+import { updateD3Diagram } from "./2r-update-d3-diagram";
+import { positionNodes } from "./4-position-nodes";
 import { useAtomValue, useSetAtom } from "jotai";
 import { allNodesAtom, dataAtom, linkDataAtom } from "./8-atoms";
 

@@ -1,7 +1,8 @@
 import * as d3 from "d3";
 import { type HierarchicalData } from "@/store/9-types";
 import { type OurLink, type OurNode } from "./9-types-internal";
-import { createAllNodesAndLinks } from "./8-atoms";
+import { createAllNodesAndLinks } from "./3-create-all-nodes-and-links";
+import { positionNodes } from "./4-position-nodes";
 
 interface HierarchicalEdgeBundlingProps {
     data: HierarchicalData;
@@ -41,19 +42,6 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
 
     // Add title
     // buildSvgTitle(svg, width);
-}
-
-export function positionNodes(allNodes: OurNode[], centerX: number, centerY: number, radius: number): void {
-    // Create circular positions for nodes
-    const angleStep = (2 * Math.PI) / allNodes.length;
-    allNodes.forEach(
-        (node, i) => {
-            const angle = i * angleStep;
-            node.x = centerX + Math.cos(angle) * radius;
-            node.y = centerY + Math.sin(angle) * radius;
-            node.angle = angle;
-        }
-    );
 }
 
 function buildSvgLinks(svg: d3.Selection<SVGSVGElement, any, any, any>, linkData: OurLink[], centerX: number, centerY: number): d3.Selection<SVGPathElement, OurLink, SVGSVGElement, any> {
