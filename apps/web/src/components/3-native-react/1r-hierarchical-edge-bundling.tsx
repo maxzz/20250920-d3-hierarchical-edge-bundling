@@ -9,10 +9,10 @@ export function HierarchicalEdgeBundlingReact({ data, className, ...rest }: { da
     const width = 800;
     const height = 600;
 
-    useEffect(
-        () => updateD3Diagram({ data, width, height, svgRef }),
-        [data, width, height]
-    );
+    // useEffect(
+    //     () => updateD3Diagram({ data, width, height, svgRef }),
+    //     [data, width, height]
+    // );
 
     return (
         <svg
@@ -20,6 +20,7 @@ export function HierarchicalEdgeBundlingReact({ data, className, ...rest }: { da
             viewBox={`0 0 ${width} ${height}`}
             className={classNames("size-full border bg-white border-gray-200 rounded-lg shadow-sm", className)}
             {...rest}
-        />
+        >
+        </svg>
     );
 }
