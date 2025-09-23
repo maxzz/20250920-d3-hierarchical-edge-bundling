@@ -43,7 +43,7 @@ export function updateD3Diagram({ data, width, height, svgRef }: Required<Hierar
     // buildSvgTitle(svg, width);
 }
 
-function positionNodes(allNodes: OurNode[], centerX: number, centerY: number, radius: number): void {
+export function positionNodes(allNodes: OurNode[], centerX: number, centerY: number, radius: number): void {
     // Create circular positions for nodes
     const angleStep = (2 * Math.PI) / allNodes.length;
     allNodes.forEach(
