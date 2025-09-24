@@ -11,23 +11,29 @@ const _dataAtom = atom<HierarchicalData>({
 });
 
 type DataModel = {
-    data: HierarchicalData;
-    // allNodes: OurNode[];
-    // linkData: OurLink[];
-    coordinates: {
+    dataAtom: PA<HierarchicalData>;
+    allNodesAtom: Atom<OurNode[]>;
+    linkDataAtom: Atom<OurLink[]>;
+    coordinatesAtom: PA<{
         centerX: number;
         centerY: number;
         radius: number;
-    };
+    }>;
 };
 
-export const dataModel: Atomize<DataModel> = {
+export const dataModel: DataModel = {
     dataAtom: atom<HierarchicalData>({
         nodes: [],
         links: [],
     }),
-    // allNodesAtom: atom<OurNode[]>([]),
-    // linkDataAtom: atom<OurLink[]>([]),
+    allNodesAtom: atom(
+        (get) => {
+            const { allNodes } = createAllNodesAndLinks(get(dataModel.dataAtom));
+            // const rv;
+            return allNodes;
+        },
+    ),
+    linkDataAtom: atom<OurLink[]>([]),
     coordinatesAtom: atom({
         centerX: 0,
         centerY: 0,
