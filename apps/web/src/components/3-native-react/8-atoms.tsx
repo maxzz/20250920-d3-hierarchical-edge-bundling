@@ -14,9 +14,11 @@ type DataModel = {
     data: HierarchicalData;
     // allNodes: OurNode[];
     // linkData: OurLink[];
-    centerX: number;
-    centerY: number;
-    radius: number;
+    coordinates: {
+        centerX: number;
+        centerY: number;
+        radius: number;
+    };
 };
 
 export const dataModel: Atomize<DataModel> = {
@@ -26,9 +28,11 @@ export const dataModel: Atomize<DataModel> = {
     }),
     // allNodesAtom: atom<OurNode[]>([]),
     // linkDataAtom: atom<OurLink[]>([]),
-    centerXAtom: atom(0),
-    centerYAtom: atom(0),
-    radiusAtom: atom(0),
+    coordinatesAtom: atom({
+        centerX: 0,
+        centerY: 0,
+        radius: 0,
+    }),
 };
 
 export const dataAtom = atom((get) => get(_dataAtom), _SetDataAtom);
