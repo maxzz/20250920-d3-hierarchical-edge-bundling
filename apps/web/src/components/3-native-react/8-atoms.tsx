@@ -2,7 +2,8 @@ import { atom } from "jotai";
 import { type HierarchicalData } from "@/store/9-types";
 import { type OurNode, type OurLink } from "./9-types-internal";
 import { createAllNodesAndLinks } from "./3-create-all-nodes-and-links";
-import { get } from "http";
+
+// no ready yet
 
 const _dataAtom = atom<HierarchicalData>({
     nodes: [],
@@ -41,21 +42,25 @@ export const dataModel: DataModel = {
     }),
 };
 
+//
+
 export const dataAtom = atom((get) => get(_dataAtom), _SetDataAtom);
 
 function _SetDataAtom(get: Getter, set: Setter, newData: HierarchicalData): void {
     const { allNodes, linkData } = createAllNodesAndLinks(newData);
-    // set(allNodesAtom, allNodes);
+    set(allNodesAtom, allNodes);
     set(linkDataAtom, linkData);
     set(_dataAtom, newData);
 }
 
-export const allNodesAtom = atom(
-    (get) => {
-        const { allNodes } = createAllNodesAndLinks(get(dataModel.dataAtom));
-        // const rv;
-        return allNodes;
-    },
-);
+export const allNodesAtom = atom<OurNode[]>([]);
+
+// export const allNodesAtom = atom(
+//     (get) => {
+//         const { allNodes } = createAllNodesAndLinks(get(dataModel.dataAtom));
+//         // const rv;
+//         return allNodes;
+//     },
+// );
 
 export const linkDataAtom = atom<OurLink[]>([]);
