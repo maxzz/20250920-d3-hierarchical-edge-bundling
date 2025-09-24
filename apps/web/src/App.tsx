@@ -17,13 +17,13 @@ export function App() {
                 </p>
             </header>
 
-            <main className="max-w-3xl mx-auto bg-white flex flex-col items-center justify-center">
+            <main className="justify-self-center px-4 max-w-3xl bg-white flex flex-col items-center justify-center">
 
                 {/* <HierarchicalEdgeBundlingMonolith className="" data={sampleData} /> */}
-                <HierarchicalEdgeBundlingByParts className="" data={sampleData} />
+                <HierarchicalEdgeBundlingByParts className="border bg-white border-gray-200 rounded-lg shadow-sm" data={sampleData} />
                 {/* <HierarchicalEdgeBundlingReact className="" data={sampleData} /> */}
 
-                <p className="py-1 text-gray-600">
+                <p className="py-2 text-gray-600">
                     Interaction: Hover over nodes to highlight their connections.
                     The visualization shows relationships between nodes grouped in different clusters with bundled edges.
                 </p>

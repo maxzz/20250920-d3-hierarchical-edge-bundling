@@ -18,7 +18,7 @@ export function HierarchicalEdgeBundlingByParts({ data, className, ...rest }: { 
         <svg
             ref={svgRef}
             viewBox={`0 0 ${width} ${height}`}
-            className={classNames("size-full border bg-white border-gray-200 rounded-lg shadow-sm", className)}
+            className={classNames("size-full", className)}
             {...rest}
         />
     );
