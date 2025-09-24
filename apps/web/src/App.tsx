@@ -4,6 +4,7 @@ import { HierarchicalEdgeBundlingByParts } from "./components/2-native-d3-by-par
 import { HierarchicalEdgeBundlingReact } from "./components/3-native-react";
 
 export function App() {
+    const a = import.meta.env.VITE_MODIFIED_VERSION || '';
     return (
         <div className="min-h-screen mx-auto text-xs grid grid-rows-[auto_1fr_auto] gap-4">
 
@@ -31,7 +32,7 @@ export function App() {
 
             <footer className="py-4 text-gray-500 bg-gray-50 border-t border-gray-200">
                 <p className="text-center">
-                    September 2025
+                    September 2025 {a}
                 </p>
             </footer>
 
