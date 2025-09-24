@@ -2,8 +2,7 @@ import { atom } from "jotai";
 import { type HierarchicalData } from "@/store/9-types";
 import { type OurNode, type OurLink } from "./9-types-internal";
 import { createAllNodesAndLinks } from "./3-create-all-nodes-and-links";
-import type { Atom } from "jotai";
-import type { Atomize } from "@/utils";
+import { get } from "http";
 
 const _dataAtom = atom<HierarchicalData>({
     nodes: [],
@@ -12,8 +11,8 @@ const _dataAtom = atom<HierarchicalData>({
 
 type DataModel = {
     dataAtom: PA<HierarchicalData>;
-    allNodesAtom: Atom<OurNode[]>;
-    linkDataAtom: Atom<OurLink[]>;
+    allNodesAtom: PA<OurNode[]>;
+    linkDataAtom: PA<OurLink[]>;
     coordinatesAtom: PA<{
         centerX: number;
         centerY: number;
@@ -22,17 +21,18 @@ type DataModel = {
 };
 
 export const dataModel: DataModel = {
-    dataAtom: atom<HierarchicalData>({
-        nodes: [],
-        links: [],
-    }),
-    allNodesAtom: atom(
-        (get) => {
-            const { allNodes } = createAllNodesAndLinks(get(dataModel.dataAtom));
-            // const rv;
-            return allNodes;
-        },
+    dataAtom: atom(
+        (get) => get(_dataAtom),
+        (get, set, newData: SetStateAction<HierarchicalData>) => {
+            const value = typeof newData === 'function' ? newData(get(_dataAtom)) : newData;
+            const { allNodes, linkData } = createAllNodesAndLinks(value);
+
+            set(dataModel.allNodesAtom, allNodes);
+            set(dataModel.linkDataAtom, linkData);
+            set(_dataAtom, newData);
+        }
     ),
+    allNodesAtom: atom<OurNode[]>([]),
     linkDataAtom: atom<OurLink[]>([]),
     coordinatesAtom: atom({
         centerX: 0,
@@ -45,7 +45,7 @@ export const dataAtom = atom((get) => get(_dataAtom), _SetDataAtom);
 
 function _SetDataAtom(get: Getter, set: Setter, newData: HierarchicalData): void {
     const { allNodes, linkData } = createAllNodesAndLinks(newData);
-    //set(allNodesAtom, allNodes);
+    // set(allNodesAtom, allNodes);
     set(linkDataAtom, linkData);
     set(_dataAtom, newData);
 }
