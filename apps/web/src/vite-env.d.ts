@@ -5,12 +5,10 @@ declare module '*?asset' {
     export default src;
 }
 
-// // Add this file to declare the env property on ImportMeta
-// interface ImportMetaEnv {
-//     readonly VITE_MODIFIED_VERSION?: string;
-//     // add other env variables here if needed
-// }
+interface ImportMetaEnv {
+    readonly VITE_MODIFIED_VERSION?: string;
+}
 
-// interface ImportMeta {
-//     readonly env: ImportMetaEnv;
-// }
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
+}
