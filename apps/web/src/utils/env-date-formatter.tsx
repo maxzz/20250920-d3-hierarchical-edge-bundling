@@ -7,8 +7,12 @@ export const dateFormatter = new Intl.DateTimeFormat('en-US', {
     // second: '2-digit',
 });
 
-export function getModifiedDate() {
-    const date = new Date(import.meta.env.VITE_MODIFIED || '0255-01-01T00:00:00.000Z');
+export function envModifiedDate() {
+    const date = new Date(import.meta.env.VITE_MODIFIED || '2025-01-01T00:00:00.000Z');
     const formattedDate = dateFormatter.format(date).replaceAll('/', '.');
     return formattedDate;
+}
+
+export function envBuildVersion() {
+    return import.meta.env.VITE_BUILD || '0.0.0';
 }

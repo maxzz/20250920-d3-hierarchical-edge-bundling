@@ -1,4 +1,4 @@
-import { getModifiedDate } from "./utils";
+import { envModifiedDate } from "./utils";
 import { sampleData } from "./store/data/1-sample-data";
 import { HierarchicalEdgeBundlingMonolith } from "./components/1-native-d3-monolith";
 import { HierarchicalEdgeBundlingByParts } from "./components/2-native-d3-by-parts";
@@ -39,7 +39,7 @@ function Footer() {
     return (
         <footer className="py-4 text-gray-500 bg-gray-50 border-t border-gray-200">
             <p className="text-center">
-                {`Last updated: ${getModifiedDate()}`}
+                {`Last updated: ${envModifiedDate()}`}
             </p>
         </footer>
     );
