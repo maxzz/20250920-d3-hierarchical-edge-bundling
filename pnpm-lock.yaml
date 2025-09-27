@@ -66,6 +66,9 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.2
+      upen:
+        specifier: ^1.0.2
+        version: 1.0.2
       vite:
         specifier: ^5.3.4
         version: 5.4.20(@types/node@20.19.17)
@@ -1391,6 +1394,11 @@ packages:
     engines: {node: '>=18'}
     dev: true
 
+  /commander@11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
+    engines: {node: '>=16'}
+    dev: true
+
   /commander@13.1.0:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
@@ -2398,6 +2406,14 @@ packages:
       browserslist: 4.26.2
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  /upen@1.0.2:
+    resolution: {integrity: sha512-MaHsFTbahNtEz6o9PRap1X2mWiHaZThr32+zfP1Cy4xa7sGoXBsmcCnu4CrrMz8p5bzLPPovpMrj1TROWfmTsQ==}
+    engines: {node: '>=16.0.0'}
+    hasBin: true
+    dependencies:
+      commander: 11.1.0
+    dev: true
 
   /vite@5.4.20(@types/node@20.19.17):
     resolution: {integrity: sha512-j3lYzGC3P+B5Yfy/pfKNgVEg4+UtcIJcVRt2cDjIOmhLourAqPqf8P7acgxeiSgUB7E3p2P8/3gNIgDLpwzs4g==}
