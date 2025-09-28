@@ -1,4 +1,4 @@
-// import * as d3 from "d3";
+// import * as d3 from "d3"; //https://observablehq.com/@d3/hierarchical-edge-bundling
 // import { type HierarchicalData } from "@/store/9-types";
 // import { type OurLink, type OurNode } from "./9-types-internal";
 
