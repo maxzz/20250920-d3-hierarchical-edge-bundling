@@ -26,6 +26,7 @@
         "typescript": "^5.5.0"
     },
     "scripts": {
+        "tsc:all": "p -r tsc -w",
         "dev": "pnpm --color --filter web dev",
         "build": "pnpm update-env && pnpm --filter web build",
         "preview": "pnpm --filter web preview",
