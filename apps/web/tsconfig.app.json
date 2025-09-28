@@ -27,6 +27,8 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
 
+        //"preserveSymlinks": false,
+
         /* Path mapping */
         "baseUrl": ".",
         "paths": {

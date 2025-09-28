@@ -25,7 +25,7 @@
     "type": "module",
     "scripts": {
         "tsc2": "tsc --build --verbose",
-        "tsc": "tsc -w",
+        "tsc": "tsc",
         "dev": "vite",
         "build": "tsc && upen && vite build",
         "preview": "vite preview",

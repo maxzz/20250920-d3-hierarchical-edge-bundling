@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Edge against localhost",
+            "name": "msedge:3000",
             "type": "msedge",
             "request": "launch",
             "url": "http://localhost:3000",
