@@ -1,4 +1,4 @@
-import { type HierarchicalData } from "@/store/9-types";
+import { type HierarchicalData } from "@/store/1-hierarchical-edge-bundling/9-types";
 import { type OurNode, type OurLink } from "./9-types-internal";
 
 export function createAllNodesAndLinks(data: HierarchicalData): { allNodes: OurNode[]; linkData: OurLink[]; } {

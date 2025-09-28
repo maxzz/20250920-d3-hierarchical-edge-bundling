@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type HierarchicalData } from "@/store/9-types";
+import { type HierarchicalData } from "@/store/1-hierarchical-edge-bundling/9-types";
 import { type OurNode, type OurLink } from "./9-types-internal";
 import { createAllNodesAndLinks } from "./3-create-all-nodes-and-links";
 

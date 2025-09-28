@@ -1,4 +1,4 @@
-import { type HierarchicalData } from "../9-types";
+import { type HierarchicalData } from "../1-hierarchical-edge-bundling/9-types";
 
 export const sampleData: HierarchicalData = {
     nodes: [

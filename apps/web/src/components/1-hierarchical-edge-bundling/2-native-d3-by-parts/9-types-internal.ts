@@ -1,4 +1,4 @@
-import { type NodeData } from "@/store/9-types";
+import { type NodeData } from "@/store/1-hierarchical-edge-bundling/9-types";
 
 export interface OurNode extends NodeData {
     // group: number;

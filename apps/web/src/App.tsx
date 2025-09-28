@@ -1,5 +1,5 @@
 import { envModifiedDate } from "./utils";
-import { sampleData } from "./store/data/1-sample-data";
+import { sampleData as sampleData1 } from "./store/1-hierarchical-edge-bundling/data/1-sample-data";
 import { HierarchicalEdgeBundlingMonolith } from "./components/1-hierarchical-edge-bundling/1-native-d3-monolith";
 import { HierarchicalEdgeBundlingByParts } from "./components/1-hierarchical-edge-bundling/2-native-d3-by-parts";
 import { HierarchicalEdgeBundlingReact } from "./components/1-hierarchical-edge-bundling/3-native-react";
@@ -20,9 +20,9 @@ export function App() {
 
             <main className="justify-self-center px-4 max-w-3xl bg-white flex flex-col items-center justify-center">
 
-                {/* <HierarchicalEdgeBundlingMonolith className="" data={sampleData} /> */}
-                <HierarchicalEdgeBundlingByParts className="border bg-white border-gray-200 rounded-lg shadow-sm" data={sampleData} />
-                {/* <HierarchicalEdgeBundlingReact className="" data={sampleData} /> */}
+                {/* <HierarchicalEdgeBundlingMonolith className="" data={sampleData1} /> */}
+                <HierarchicalEdgeBundlingByParts className="border bg-white border-gray-200 rounded-lg shadow-sm" data={sampleData1} />
+                {/* <HierarchicalEdgeBundlingReact className="" data={sampleData1} /> */}
 
                 <p className="py-2 text-gray-600">
                     Interaction: Hover over nodes to highlight their connections.

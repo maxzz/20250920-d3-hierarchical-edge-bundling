@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { type HierarchicalData } from "@/store/9-types";
+import { type HierarchicalData } from "@/store/1-hierarchical-edge-bundling/9-types";
 import { type OurLink, type OurNode } from "./9-types-internal";
 import { createAllNodesAndLinks } from "./3-create-all-nodes-and-links";
 import { positionNodes } from "./4-position-nodes";
