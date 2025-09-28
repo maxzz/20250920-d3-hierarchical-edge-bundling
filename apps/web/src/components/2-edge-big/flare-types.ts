@@ -1,10 +1,13 @@
 // First, import the JSON file and use typeof to infer its structure
 import flareData from './data/flare.json';
 
+/*
 // Method 1: Direct type inference from imported JSON
 export type FlareData = typeof flareData;
 export type FlareItem = typeof flareData[0];
+*/
 
+/*
 // Method 2: Explicitly define the inferred structure
 export interface FlareNode {
     name: string;
@@ -39,3 +42,4 @@ export function getFlareData(): FlareDataArray {
     }
     return flareData;
 }
+*/
