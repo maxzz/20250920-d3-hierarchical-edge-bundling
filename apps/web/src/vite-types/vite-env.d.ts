@@ -17,3 +17,14 @@ declare module '*.json' {
     const value: any;
     export default value;
 }
+
+// Specific type for flare.json files
+declare module '*/flare.json' {
+    interface FlareNode {
+        name: string;
+        size: number;
+        imports: string[];
+    }
+    const value: FlareNode[];
+    export default value;
+}

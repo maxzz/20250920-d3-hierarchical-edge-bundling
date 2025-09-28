@@ -22,6 +22,7 @@
     "packageManager": "pnpm@8.15.0",
     "devDependencies": {
         "@types/node": "^24.5.2",
+        "json-to-ts": "^2.1.0",
         "tsx": "^4.20.6"
     },
     "scripts": {
@@ -29,6 +30,7 @@
         "dev": "pnpm --color --filter web dev",
         "build": "pnpm update-env && pnpm --filter web build",
         "preview": "pnpm --filter web preview",
-        "update-env": "tsx scripts/update-env.ts"
+        "update-env": "tsx scripts/update-env.ts",
+        "generate-flare-types": "tsx scripts/generate-flare-types.ts"
     }
 }

@@ -1,5 +1,5 @@
 import * as d3 from "d3"; //https://observablehq.com/@d3/hierarchical-edge-bundling
-import flareData from "./data/flare.json";
+import flareData from "../data/flare.json";
 
 console.log(flareData);
 

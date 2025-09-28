@@ -2,6 +2,7 @@ import { type HTMLAttributes, useEffect, useRef } from "react";
 import { classNames } from "../../../utils";
 import type { HierarchicalData } from "@/store/1-hierarchical-edge-bundling/9-types";
 //import { updateD3Diagram } from "./2m-update-d3-diagram";
+import "./org";
 
 export function HierarchicalEdgeBundlingMonolith2({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
     const svgRef = useRef<SVGSVGElement>(null);
