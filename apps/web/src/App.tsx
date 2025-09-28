@@ -24,9 +24,9 @@ export function App() {
                 {/* <HierarchicalEdgeBundlingMonolith className="" data={sampleData1} /> */}
                 {/* <HierarchicalEdgeBundlingReact className="" data={sampleData1} /> */}
                 
-                {/* <HierarchicalEdgeBundlingByParts className="border bg-white border-gray-200 rounded-lg shadow-sm" data={sampleData1} /> */}
+                <HierarchicalEdgeBundlingByParts className="border bg-white border-gray-200 rounded-lg shadow-sm" data={sampleData1} />
 
-                <HierarchicalEdgeBundlingMonolith2 className="border bg-green-500/20 border-gray-200 rounded-lg shadow-sm" data={sampleData1} />
+                {/* <HierarchicalEdgeBundlingMonolith2 className="border bg-green-500/20 border-gray-200 rounded-lg shadow-sm" data={sampleData1} /> */}
 
                 <p className="py-2 text-gray-600">
                     Interaction: Hover over nodes to highlight their connections.

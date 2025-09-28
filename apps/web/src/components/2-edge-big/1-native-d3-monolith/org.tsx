@@ -1,22 +1,17 @@
 import * as d3 from "d3"; //https://observablehq.com/@d3/hierarchical-edge-bundling
-import flareData from "../data/flare.json";
+import { data, type FlareItem } from "../data";
 
-console.log(flareData);
-
-
-// const data = [
-//     { name: "d3", imports: ["d3-array", "d3-axis", "d3-brush", "d3-chord", "d3-collection", "d3-color", "d3-contour", "d3-dispatch", "d3-drag", "d3-dsv", "d3-ease", "d3-fetch", "d3-force", "d3-format", "d3-geo", "d3-hierarchy", "d3-interpolate", "d3-path", "d3-polygon", "d3-quadtree", "d3-random", "d3-request", "d3-sankey", "d3-scale", "d3-scale-chromatic", "d3-selection", "d3-shape", "d3-time", "d3-time-format", "d3-timer", "d3-transition", "d3-voronoi"] },
-//     { name: "d3-array", imports: ["d3-collection", "d3-dsv", "d3-format", "d3-time", "d3-time-format"] },
-// ]''
+console.log(data);
 
 // //const chart = {
 // function chat() {
 //     const width = 954;
 //     const radius = width / 2;
 
-//     const tree = d3.cluster()
+//     const tree = d3.cluster<ExtendedFlareItem>()
 //         .size([2 * Math.PI, radius - 100]);
-//     const root = tree(bilink(d3.hierarchy(data)
+        
+//     const root = tree(bilink(d3.hierarchy<FlareItem>(data)
 //         .sort((a, b) => d3.ascending(a.height, b.height) || d3.ascending(a.data.name, b.data.name))));
 
 //     const svg = d3.create("svg")
@@ -99,13 +94,35 @@ console.log(flareData);
 //     return root;
 // }
 
-// function bilink(root) {
+// // Define the extended node type
+// type ExtendedFlareItem = FlareItem & {
+//     incoming: [d3.HierarchyNode<ExtendedFlareItem>, d3.HierarchyNode<ExtendedFlareItem>][];
+//     outgoing: [d3.HierarchyNode<ExtendedFlareItem>, d3.HierarchyNode<ExtendedFlareItem>][];
+// };
+
+// function bilink(root: d3.HierarchyNode<FlareItem>) {
 //     const map = new Map(root.leaves().map(d => [id(d), d]));
-//     for (const d of root.leaves()) d.incoming = [], d.outgoing = d.data.imports.map(i => [d, map.get(i)]);
-//     for (const d of root.leaves()) for (const o of d.outgoing) o[1].incoming.push(o);
-//     return root;
+    
+//     // Cast nodes to extended type and initialize properties
+//     for (const d of root.leaves()) {
+//         const extendedNode = d as unknown as d3.HierarchyNode<ExtendedFlareItem>;
+//         extendedNode.data.incoming = [];
+//         extendedNode.data.outgoing = d.data.imports.map(i => [extendedNode, map.get(i)] as unknown as [d3.HierarchyNode<ExtendedFlareItem>, d3.HierarchyNode<ExtendedFlareItem>]);
+//     }
+    
+//     // Build incoming connections
+//     for (const d of root.leaves()) {
+//         const extendedNode = d as unknown as d3.HierarchyNode<ExtendedFlareItem>;
+//         for (const o of extendedNode.data.outgoing) {
+//             if (o[1]) {
+//                 (o[1] as d3.HierarchyNode<ExtendedFlareItem>).data.incoming.push(o);
+//             }
+//         }
+//     }
+    
+//     return root as unknown as d3.HierarchyNode<ExtendedFlareItem>;
 // }
 
-// function id(node) {
+// function id(node: d3.HierarchyNode<any>): string {
 //     return `${node.parent ? id(node.parent) + "." : ""}${node.data.name}`;
 // }
