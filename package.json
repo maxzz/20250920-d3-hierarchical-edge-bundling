@@ -22,8 +22,7 @@
     "packageManager": "pnpm@8.15.0",
     "devDependencies": {
         "@types/node": "^24.5.2",
-        "tsx": "^4.20.6",
-        "typescript": "^5.5.0"
+        "tsx": "^4.20.6"
     },
     "scripts": {
         "tsc:all": "p -r tsc -w",
