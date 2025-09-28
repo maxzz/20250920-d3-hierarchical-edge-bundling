@@ -1,8 +1,8 @@
 import { envModifiedDate } from "./utils";
 import { sampleData as sampleData1 } from "./store/1-hierarchical-edge-bundling/data/1-sample-data";
-import { HierarchicalEdgeBundlingMonolith } from "./components/1-hierarchical-edge-bundling/1-native-d3-monolith";
-import { HierarchicalEdgeBundlingByParts } from "./components/1-hierarchical-edge-bundling/2-native-d3-by-parts";
-import { HierarchicalEdgeBundlingReact } from "./components/1-hierarchical-edge-bundling/3-native-react";
+import { HierarchicalEdgeBundlingMonolith } from "./components/1-edge-simple/1-native-d3-monolith";
+import { HierarchicalEdgeBundlingByParts } from "./components/1-edge-simple/2-native-d3-by-parts";
+import { HierarchicalEdgeBundlingReact } from "./components/1-edge-simple/3-native-react";
 
 export function App() {
     return (

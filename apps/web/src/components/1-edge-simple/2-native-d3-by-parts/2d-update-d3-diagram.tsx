@@ -8,7 +8,7 @@ interface HierarchicalEdgeBundlingProps {
     height: number;
 }
 
-export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement>; }): void {
+export function updateD3Diagram({ data, width, height, svgRef }: Required<HierarchicalEdgeBundlingProps> & { svgRef: React.RefObject<SVGSVGElement | null>; }): void {
     if (!data || !svgRef.current) {
         return;
     }

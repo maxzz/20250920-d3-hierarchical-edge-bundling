@@ -1,6 +1,6 @@
 import { type HTMLAttributes, useEffect, useRef } from "react";
-import { classNames } from "../../utils";
-import { type HierarchicalData } from "../../store/9-types";
+import { classNames } from "../../../utils";
+import { type HierarchicalData } from "../../../store/1-hierarchical-edge-bundling/9-types";
 import { updateD3Diagram } from "./2d-update-d3-diagram";
 
 export function HierarchicalEdgeBundlingByParts({ data, className, ...rest }: { data: HierarchicalData; } & HTMLAttributes<SVGSVGElement>) {
