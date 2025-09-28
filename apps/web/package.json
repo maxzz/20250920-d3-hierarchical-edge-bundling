@@ -24,8 +24,7 @@
     },
     "type": "module",
     "scripts": {
-        "tsc2": "tsc --build --verbose",
-        "tsc": "tsc",
+        "tsc": "tsc --project tsconfig.app.json",
         "dev": "vite",
         "build": "tsc && upen && vite build",
         "preview": "vite preview",
