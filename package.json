@@ -21,7 +21,7 @@
     },
     "packageManager": "pnpm@8.15.0",
     "devDependencies": {
-        "@types/node": "^24.5.2",
+        "@types/node": "^24.6.2",
         "json-to-ts": "^2.1.0",
         "tsx": "^4.20.6"
     },
